@@ -3,12 +3,10 @@
 {% block content %}
 <h1>Welcome to my app</h1>
 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam perspiciatis voluptas minima? Temporibus quam nulla eum autem qui commodi, aut necessitatibus vitae ex perferendis fugiat, aliquid non nemo recusandae minus?</p>
-<h2>Create a new job</h2>
-<form method="POST">
-    {% csrf_token %}
-    {{form}}
-    <button>
-        Save
-    </button>
-</form>
+<h2>Tasks</h2>
+{% for task in tasks %}
+<article>
+    <p>{{task.title}}: {{task.description}}</p>
+</article>
+{% endfor %}
 {% endblock %}

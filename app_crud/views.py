@@ -6,11 +6,16 @@ from .form import CreateNew
 createnew = CreateNew()
 # Create your views here.
 def index(request):
-#    return render(request, 'index.html')
-
-#def create_new(request):
+    tasks = Task.objects.all()
+    return render(request, 'index.html',
+                  {
+                    'tasks': tasks
+                  }
+        )
+    
+def create_task (request):
     if request.method == 'GET':
-        return render(request, 'index.html',
+        return render(request, 'new_task.html',
                       {
                         'form':createnew
                       }
@@ -21,3 +26,8 @@ def index(request):
             description = request.POST['description']
         )
         return redirect('/')
+
+def delete_task(request, task_id):
+    task = Task.objects.get(id=task_id)
+    task.delete()
+    return redirect("/index/")
