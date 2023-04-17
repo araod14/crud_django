@@ -20,7 +20,7 @@
           rows="2"></textarea>
         <button>save</button>
       </form>
-<h2>Tasks</h2>
+<h2>Jobs</h2>
 {% for task in tasks %}
 <div>
     <p>{{task.title}}: {{task.description}}</p>
@@ -29,6 +29,8 @@
         <button>Delete</button>
       </form>
 </div>
+{% empty %}
+<h2>No jobs yet</h2>
 {% endfor %}
 {% endblock %}
 
