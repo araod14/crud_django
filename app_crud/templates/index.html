@@ -4,13 +4,22 @@
 <h1>Welcome to my app</h1>
 <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam perspiciatis voluptas minima? Temporibus quam nulla eum autem qui commodi, aut necessitatibus vitae ex perferendis fugiat, aliquid non nemo recusandae minus?</p>
 <h2>Create a new job</h2>
-    <form action="{% url 'new_task' %}" method="POST">
+    <!-- Create Form -->
+      <form
+        action="{% url 'new_task' %}"
+        method="POST">
         {% csrf_token %}
-        {{ form.as_p }}
-        <button>
-            Save
-        </button>
-    </form>
+        <label for="title">Write a title:</label>
+        <input
+          type="text"
+          name="title"/>
+        <label for="description">Write a description:</label>
+        <textarea
+          name="description"
+          id="description"
+          rows="2"></textarea>
+        <button>save</button>
+      </form>
 <h2>Tasks</h2>
 {% for task in tasks %}
 <div>
