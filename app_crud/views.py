@@ -6,8 +6,14 @@ from .models import Task
 #04v104
 
 # Create your views here.
-
-    
+def index(request):
+    tasks = Task.objects.all()
+    return render(request, 'index.html',
+                  {
+                    'tasks': tasks
+                  }
+        )
+ 
 def create_task (request):
     new_title = request.POST["title"]
     new_description = request.POST["description"]
@@ -20,14 +26,6 @@ def create_task (request):
     task.save()
     return redirect("/")
     
-def index(request):
-    tasks = Task.objects.all()
-    return render(request, 'index.html',
-                  {
-                    'tasks': tasks
-                  }
-        )
-
 def delete_task(request, task_id):
     task = Task.objects.get(id=task_id)
     task.delete()

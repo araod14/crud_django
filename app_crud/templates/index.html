@@ -1,37 +1,51 @@
 {% extends 'layouts/base.html' %}
 
 {% block content %}
-<h1>Welcome to my app</h1>
-<p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam perspiciatis voluptas minima? Temporibus quam nulla eum autem qui commodi, aut necessitatibus vitae ex perferendis fugiat, aliquid non nemo recusandae minus?</p>
-<h2>Create a new job</h2>
-    <!-- Create Form -->
-      <form
-        action="{% url 'new_task' %}"
-        method="POST">
-        {% csrf_token %}
-        <label for="title">Write a title:</label>
-        <input
-          type="text"
-          name="title"/>
-        <label for="description">Write a description:</label>
-        <textarea
-          name="description"
-          id="description"
-          rows="2"></textarea>
-        <button>save</button>
-      </form>
-<h2>Jobs</h2>
-{% for task in tasks %}
-<div>
-    <p>{{task.title}}: {{task.description}}</p>
-    <form action="{% url 'delete_task' task.id %}" method="POST">
-        {% csrf_token %}
-        <button>Delete</button>
-      </form>
+<div class="container">
+  <div class="row">
+    <div class="col-md-4 offset-md-4">
+      <h1 class="display-5 text-center fw-bold">Welcome</h1>
+      <p class="lead text-start">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aliquam perspiciatis voluptas minima? </p>
+      <h2 class="display-6 text-center">New job</h2>
+          <!-- Create Form -->
+            <form
+              action="{% url 'new_task' %}"
+              method="POST"
+              class="card card-body bg-secondary">
+              {% csrf_token %}
+              <label for="title">Title:</label>
+              <input
+                type="text"
+                name="title"
+                placeholder="Write a tite"
+                class="form-control mb-2"/>
+              <label for="description">Description:</label>
+              <textarea
+                name="description"
+                id="description"
+                rows="3"
+                placeholder="Write a description"
+                class="form-control mb-2"
+                ></textarea>
+              <button class="btn btn-success">save</button>
+            </form>
+      {% for task in tasks %}
+      <div class="card card-body text-black mt-2 d-flex flex-row justify-content-between">
+        <div>
+          <h4>{{task.title}}</h4>
+          <p>{{task.description}}</p>
+        </div>
+        <form action="{% url 'delete_task' task.id %}" method="POST">
+          {% csrf_token %}
+          <button class="btn btn-danger btn-sm">Delete</button>
+          </form>
+      </div>
+      {% empty %}
+      <h2 class="display-6 text-center">No jobs yet</h2>
+      {% endfor %}
+    </div>
+  </div>
 </div>
-{% empty %}
-<h2>No jobs yet</h2>
-{% endfor %}
 {% endblock %}
 
 
